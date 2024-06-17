@@ -9,6 +9,7 @@ const router = express.Router()
 
 router.post('/', validateRequest(CarValidation.carZodSchema), CarControllers.createCar);
 router.get('/', CarControllers.getAllCars);
+router.get('/:id', CarControllers.getSingleCar);
 
 
 
