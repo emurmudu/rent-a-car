@@ -8,10 +8,16 @@ const createCarIntoDB = async (payload: TCar)=>{
     return result;
 }
 
+const getAllAcarsFromDB = async ()=>{
+    const result = await CarModel.find();
+    return result;
+}
+
 
 
 
 export const CarServices ={
     createCarIntoDB,
+    getAllAcarsFromDB,
     
 }
