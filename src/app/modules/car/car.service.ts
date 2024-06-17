@@ -19,12 +19,20 @@ const getSingleCarFromDB = async(id:string)=>{
 }
 
 
+const updateCarFromDB = async(_id:string, update:object)=>{
+    const result = await CarModel.findByIdAndUpdate(_id, update, {new : true});
+    return result;
+}
+
+
+
 
 
 export const CarServices ={
     createCarIntoDB,
     getAllAcarsFromDB,
     getSingleCarFromDB,
+    updateCarFromDB,
 
     
 }
