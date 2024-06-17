@@ -1,7 +1,7 @@
 
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import { UserRoutes } from './app/modules/user/user.route';
+// import { UserRoutes } from './app/modules/user/user.route';
 import router from './app/routes';
 import routeNotFound from './app/middleware/routeNotFound';
 // const express = require('express')
