@@ -11,6 +11,7 @@ router.post('/', validateRequest(CarValidation.carZodSchema), CarControllers.cre
 router.get('/', CarControllers.getAllCars);
 router.get('/:id', CarControllers.getSingleCar);
 router.put('/:id', CarControllers.updateCar);
+router.delete('/:id', CarControllers.deleteCar);
 
 
 

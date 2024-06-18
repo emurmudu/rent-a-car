@@ -16,5 +16,33 @@ const carSchema = new Schema<TCar>(
     },
     { timestamps: true }
   );
+
+
+
+  // Query Middleware
+  carSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+carSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+carSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
+// creating a custom static method
+carSchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await CarModel.findById({ id });
+  return existingUser;
+};
+
+
+
+
   
   export const CarModel = model<TCar>('Car', carSchema);

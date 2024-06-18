@@ -1,34 +1,19 @@
-import { Request, Response } from "express";
+
 import { UserServices } from "./user.service";
-import userZodSchema from "./user.validation";
+import httpStatus from "http-status";
+import sendResponse from "../../utils/sendResponse";
+import catchAsync from "../../utils/catchAsync";
 
 
-
-const addUser = async (req:Request, res: Response) =>{
-    
-    try {
-        const user = req.body;
-
-        const zodParsedData = userZodSchema.parse(user)
-
-    const result = await UserServices.createUserIntoDB(zodParsedData)
-
-    res.status(200).json({
-        success: true,
-        message: 'User registered successfully',
-        data: result,
-    })
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Something went wrong',
-            error: error
-        })
-    }
-
-}
-
-
+const addUser = catchAsync(async(req, res) =>{
+    const result = await UserServices.createUserIntoDB(req.body);
+   
+    sendResponse(res, {
+        statusCode: httpStatus.OK, 
+        success:true, 
+        message: 'User registered successfully', 
+        data: result,})
+});
 
 
 
