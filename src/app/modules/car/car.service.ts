@@ -1,29 +1,29 @@
 import mongoose from "mongoose";
 import { TCar } from "./car.interface";
-import { CarModel } from "./car.model";
+import { Car } from "./car.model";
 import AppError from "../../errors/AppError";
 import httpStatus from "http-status";
 
 
 
 const createCarIntoDB = async (payload: TCar)=>{
-    const result = await CarModel.create(payload);
+    const result = await Car.create(payload);
     return result;
 }
 
 const getAllAcarsFromDB = async ()=>{
-    const result = await CarModel.find();
+    const result = await Car.find();
     return result;
 }
 
 const getSingleCarFromDB = async(id:string)=>{
-    const result = await CarModel.findById(id);
+    const result = await Car.findById(id);
     return result;
 }
 
 
 const updateCarFromDB = async(_id:string, update:object)=>{
-    const result = await CarModel.findByIdAndUpdate(_id, update, {new : true});
+    const result = await Car.findByIdAndUpdate(_id, update, {new : true});
     return result;
 }
 
@@ -33,7 +33,7 @@ const deleteCarFromDB = async (id: string) => {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const deletedCar = await CarModel.findByIdAndUpdate(
+      const deletedCar = await Car.findByIdAndUpdate(
          id ,
         { isDeleted: true },
         { new: true, session },

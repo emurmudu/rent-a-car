@@ -3,6 +3,11 @@ import app from './app';
 import config from './app/config';
 import { Server } from 'http';
 
+
+// // const mongoose = require('mongoose');
+// import mongoose from "mongoose";
+// mongoose.set('strictPopulate', false);
+
 let server: Server;
 
 async function main() {
@@ -17,6 +22,8 @@ async function main() {
   }
 }
 
-main();
 
+
+
+main();
 

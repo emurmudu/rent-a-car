@@ -5,6 +5,7 @@ import { TCar } from "./car.interface";
 
 const carSchema = new Schema<TCar>(
     {
+      
       name: { type: String, required: true, trim: true },
       description: { type: String, required: true, trim: true },
       color: { type: String, required: true, trim: true },
@@ -13,6 +14,7 @@ const carSchema = new Schema<TCar>(
       features: { type: [String], required: true },
       pricePerHour: { type: Number, required: true },
       isDeleted: { type: Boolean, default: false },
+
     },
     { timestamps: true }
   );
@@ -35,14 +37,5 @@ carSchema.pre('aggregate', function (next) {
   next();
 });
 
-// creating a custom static method
-carSchema.statics.isUserExists = async function (id: string) {
-  const existingUser = await CarModel.findById({ id });
-  return existingUser;
-};
-
-
-
-
   
-  export const CarModel = model<TCar>('Car', carSchema);
+  export const Car = model<TCar>('Car', carSchema);

@@ -1,6 +1,8 @@
+import mongoose, { Types } from "mongoose";
 
 
 export type TCar = {
+
     name: string;
     description: string;
     color: string;
@@ -9,5 +11,6 @@ export type TCar = {
     features: string[];
     pricePerHour: number;
     isDeleted: boolean;
+   
   }
   

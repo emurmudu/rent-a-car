@@ -9,7 +9,7 @@ const createCar = catchAsync(async(req, res) =>{
     const result = await CarServices.createCarIntoDB(req.body);
    
     sendResponse(res, {
-        statusCode: httpStatus.OK, 
+        statusCode: httpStatus.CREATED, 
         success:true, 
         message: 'Car created successfully', 
         data: result,})
@@ -19,7 +19,14 @@ const createCar = catchAsync(async(req, res) =>{
 const getAllCars = catchAsync(async(req, res) =>{
     const result = await CarServices.getAllAcarsFromDB();
 
-    sendResponse(res, {
+    result.length < 1
+    ? sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.NOT_FOUND,
+        message: "Data Not Found",
+        data: result,
+      })
+    : sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Cars retrieved successfully',

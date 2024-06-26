@@ -6,8 +6,8 @@ import { UserValidation } from './user.validation';
 
 const router = express.Router();
 
-router.post('/signup', validateRequest(UserValidation.userZodSchema), UserControllers.addUser);
+// router.post('/signup', validateRequest(UserValidation.userZodSchema), UserControllers.addUser);
 
 
 
-export const UserRoutes = router;
+// export const UserRoutes = router;

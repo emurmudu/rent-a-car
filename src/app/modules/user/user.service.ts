@@ -1,18 +1,18 @@
+
 import { TUser } from "./user.interface";
-import { UserModel } from "./user.model";
+import { User } from "./user.model";
 
 
 
-const createUserIntoDB = async (user:TUser) =>{
-    const result = await UserModel.create(user);
-    return result;
-}
+export const createUserIntoDB = async (user: TUser): Promise<TUser> => {
+  const result = await User.create(user);
+  return result.toObject();
+};
 
 
 
 
 
-export const UserServices ={
-    createUserIntoDB,
-
-}
+export const UserServices = {
+  createUserIntoDB,
+};
