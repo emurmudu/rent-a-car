@@ -7,7 +7,8 @@ export type TBooking = {
   startTime: string;
   endTime?: string | null;
   user: Types.ObjectId;
-  carId: Types.ObjectId;
+  // carId: Types.ObjectId;
+  car: Types.ObjectId;
   totalCost?: number;
   email: string;
 };

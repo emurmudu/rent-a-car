@@ -15,6 +15,9 @@ router.post('/',
     validateRequest(BookingValidation.bookingValidationSchema), 
     BookingControllers.createBooking);
 
+router.get('/', Auth(USER_ROLE.admin), BookingControllers.getAllBookings);
+router.get('/my-bookings', Auth(USER_ROLE.user), BookingControllers.getMyBookings);
+
 
 
 

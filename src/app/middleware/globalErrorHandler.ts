@@ -22,11 +22,6 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     },
   ];
 
-  // if(err instanceof ZodError){
-  //   statusCode:400;
-  //   message: 'ami zod error'
-  // }
-
   if (err instanceof ZodError) {
     const simplifiedError = handleZodError(err);
     statusCode = simplifiedError?.statusCode;

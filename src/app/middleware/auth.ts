@@ -9,77 +9,31 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 
 
-
-// const Auth = (...requiredRoles: Tuser_role[]) => {
-//   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-//     const token = req.headers.authorization;
-//     if (!token) {
-//       throw new AppError(
-//         httpStatus.UNAUTHORIZED,
-//         "You have no access to this route"
-//       );
-//     }
-
-//     const decoded = jwt.verify(
-//       token,
-//       config.jwt_access_secret as string
-//     ) as JwtPayload;
-    
-//     const role = decoded.role;
-//     if (requiredRoles && !requiredRoles.includes(role)) {
-//       throw new AppError(
-//         httpStatus.UNAUTHORIZED,
-//         "You have no access to this route"
-//       );
-//     }
-//     req.user = decoded as JwtPayload;
-//     next();
-//   });
-// };
-
-
-
-
-
-
-const Auth = (requiredRole: Tuser_role) => {
+const Auth = (requiredRoles: Tuser_role) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-    // check if the token send client
+    const authToken = req.headers.authorization;
 
-    if (!authHeader) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "You are not Authorized!!");
+    if (!authToken || !authToken.startsWith("Bearer ")) {
+      return next(new AppError(httpStatus.UNAUTHORIZED, "You have no access to this route"));
     }
 
-    const token = authHeader.split("Bearer ")[1];
+    const token = authToken.split(" ")[1];
 
-    // check if the token is valid
-    jwt.verify(
-      token,
-      config.jwt_access_secret as string,
-      function (err, decoded) {
-        if (err) {
-          throw new AppError(
-            httpStatus.UNAUTHORIZED,
-            "You are not Authorized!!"
-          );
-        }
-        const user = decoded as JwtPayload;
+    try {
+      const decoded = jwt.verify(token, config.jwt_access_secret as string) as JwtPayload;
 
-        if (requiredRole && user.role !== requiredRole) {
-          throw new AppError(
-            httpStatus.UNAUTHORIZED,
-            "You have no access to this route!!"
-          );
-        }
-
-        //decoded
-        req.user = user;
-        next();
+      if (requiredRoles && decoded.role !== requiredRoles) {
+        return next(new AppError(httpStatus.UNAUTHORIZED, "You have no access to this route"));
       }
-    );
+
+      req.user = decoded;
+      next();
+    } catch (err) {
+      next(new AppError(httpStatus.UNAUTHORIZED, "You have no access to this route"));
+    }
   });
 };
+
 
 
 

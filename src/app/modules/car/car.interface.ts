@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+
 
 
 export type TCar = {

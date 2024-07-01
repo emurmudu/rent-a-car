@@ -5,6 +5,7 @@ import { CarServices } from "./car.service";
 
 
 
+
 const createCar = catchAsync(async(req, res) =>{
     const result = await CarServices.createCarIntoDB(req.body);
    
@@ -16,15 +17,18 @@ const createCar = catchAsync(async(req, res) =>{
 });
 
 
+
 const getAllCars = catchAsync(async(req, res) =>{
     const result = await CarServices.getAllAcarsFromDB();
+    
 
     result.length < 1
     ? sendResponse(res, {
         success: true,
         statusCode: httpStatus.NOT_FOUND,
-        message: "Data Not Found",
-        data: result,
+        message: "No Data Found",
+        // data: result,
+        data: [],
       })
     : sendResponse(res, {
         statusCode: httpStatus.OK,
@@ -38,39 +42,69 @@ const getAllCars = catchAsync(async(req, res) =>{
 
 const getSingleCar = catchAsync(async(req, res) =>{
     const {id} = req.params;
+
     const result = await CarServices.getSingleCarFromDB(id);
 
+    result === null || result.isDeleted === true
+    ? sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.NOT_FOUND,
+        message: "No Data Found",
+        data: [],
+      })
+    :
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: 'A car is retrieved successfully',
+        message: 'A car retrieved successfully',
         data: result,
     })
 })
 
 
-const updateCar = catchAsync(async (req, res) =>{
+
+const updateCar = catchAsync(async (req, res) => {
     const id = req.params.id;
-    const updateData ={
-        $set : {
-            name: req.body.name,
-            description: req.body.description,
-            isElectric: req.body.isElectric,
-            color: req.body.color,
-            features: req.body.features,
-            pricePerHour: req.body.pricePerHour,
 
-        }
-    }
-    const result = await CarServices.updateCarFromDB(id, updateData);
+    // Fetch the car details to check its status
+    const car = await CarServices.getCarById(id);
+    // const car = await CarServices.getSingleCarFromDB(id);
 
+    car === null || car.isDeleted === true
+    ? sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.NOT_FOUND,
+        message: "No Data Found",
+        data: [],
+      })
+    :
+    car.status === 'unavailable'
+    ? sendResponse(res, {
+        success: false,
+        statusCode: httpStatus.FORBIDDEN,
+        message: "Cannot be updated this car that is already booked",
+        data: {'booked car info': car}
+      })
+    :
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: 'Car updated successfully',
-        data: result,
-    })
-})
+        data: await CarServices.updateCarIntoDB(id, {
+            $set: {
+              name: req.body.name,
+              description: req.body.description,
+              isElectric: req.body.isElectric,
+              color: req.body.color,
+              features: req.body.features,
+              pricePerHour: req.body.pricePerHour,
+              status: req.body.status,
+              isDeleted: req.body.isDeleted,
+            },
+          }),
+    });
+});
+
 
 
 const deleteCar = catchAsync(async (req, res) => {
@@ -80,10 +114,33 @@ const deleteCar = catchAsync(async (req, res) => {
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Car is deleted successfully',
+      message: 'Car deleted successfully',
       data: result,
     });
   });
+
+  
+
+  const returnCar = catchAsync(async (req, res) => {
+    const { bookingId, endTime } = req.body;
+  
+    const result = await CarServices.returnCarIntoDB(bookingId, endTime);
+  
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Car returned Successfully",
+      data: result,
+    });
+  });
+  
+  
+
+
+
+ 
+  
+  
   
 
 
@@ -94,5 +151,7 @@ export const CarControllers ={
     getSingleCar,
     updateCar,
     deleteCar,
+    returnCar,
+   
     
 }

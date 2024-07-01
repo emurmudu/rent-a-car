@@ -52,9 +52,6 @@ UserSchema.statics.isUserExistsByEmail = async function (email: string) {
   return await User.findOne({ email }).select("+password");
 };
 
-// UserSchema.statics.isUserExitsByEmail = async function (email: string) {
-//   return await User.findOne({ email });
-// };
 
 
 UserSchema.statics.isPasswordMatched = async function (
