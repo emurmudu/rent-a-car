@@ -94,8 +94,12 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 >
 ```
 {
-  "email": "johndoe@example.com",
-  "password": "password123"
+  "name": "Tesla Model 3",
+  "description": "An electric car with advanced technology and performance.",
+  "color": "White",
+  "isElectric": true,
+  "features": ["AC", "Bluetooth", "Long Range Battery"],
+  "pricePerHour": 500
 }
 ```
 * Response: Car details and success message.
