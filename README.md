@@ -1,5 +1,5 @@
 # Project Name : rent-a-car
-### Live Link :
+### Live Link : https://rent-a-car-ivory-one.vercel.app
 
 ## Project Overview
 The rent-a-car is an API-based service that manages car rentals, user authentication, car availability, and booking management. This backend system is implemented using TypeScript, Express.js, and MongoDB.
@@ -24,15 +24,15 @@ The rent-a-car is an API-based service that manages car rentals, user authentica
 * Node.js and npm installed
 * MongoDB instance (local or cloud)
 ## Getting Started
-### Project Setup
-#### Clone the Repository:
+### **Project Setup**
+#### **Clone the Repository**:
 - ```git clone https://github.com/emurmudu/rent-a-car.git```
 - ```cd rent-a-car```
-#### Install Dependencies:
+#### **Install Dependencies:**
 - ```npm install```
-#### Configure Environment Variables:
+#### **Configure Environment Variables:**
 
-Create a .env file in the root directory and add the following content:
+**Create a .env file in the root directory and add the following content:**
 - ```DATABASE_URL``` = <your_mongodb_uri>
 - ```JWT_ACCESS_SECRET``` = <your_access_secret>
 - ```JWT_ACCESS_EXPIRES_IN``` = <your_access_expires_in>
@@ -44,15 +44,15 @@ Create a .env file in the root directory and add the following content:
 - ```DEFAULT_PASS``` = <your_default_password>
 
 Replace with your actual values.
-### Running the Project:
+### **Running the Project:**
 
 Use the following command to start the development server:
 - ```npm run start:dev```
-### API Endpoints:
+### **API Endpoints:**
 
-Authentication
+**Authentication**
 
-Signup (POST): `/api/auth/signup`
+**Signup (POST): `/api/auth/signup`**
 * Request body:
 >
 ```
@@ -67,7 +67,7 @@ Signup (POST): `/api/auth/signup`
 ```
 * Response: User details and success message.
 
-Signin (POST): `/api/auth/signin`
+**Signin (POST): `/api/auth/signin`**
 * Request body:
 >
 ```
@@ -78,9 +78,9 @@ Signin (POST): `/api/auth/signin`
 ```
 * Response: User details, token, and success message.
 
-### Car Management
+### **Car Management**
 
-Create Car(POST): `/api/cars` (Admin only)
+**Create Car(POST): `/api/cars` (Admin only)**
 * Request header:
 >
 ```
@@ -100,13 +100,13 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 ```
 * Response: Car details and success message.
 
-Get All Cars(GET): `/api/cars`
+**Get All Cars(GET): `/api/cars`**
 * Response: List of cars.
 
-Get Car by ID(GET): `/api/cars/:id`
+**Get Car by ID(GET): `/api/cars/:id`**
 * Response: Car details.
 
-Update Car(PUT): `/api/cars/:id` (Admin only)
+**Update Car(PUT): `/api/cars/:id` (Admin only)**
 * Request header:
 >
 ```
@@ -125,7 +125,7 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 ```
 * Response: Updated car details and success message.
 
-Delete Car(DELETE): `/api/cars/:id` (Admin only)
+**Delete Car(DELETE): `/api/cars/:id` (Admin only)**
 * Request header:
 >
 ```
@@ -140,7 +140,7 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 
 
 
-Return Car(PUT): `/api/cars/return` (Admin only)
+**Return Car(PUT): `/api/cars/return` (Admin only)**
 * Request header:
 >
 ```
@@ -160,10 +160,10 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 ```
 * Response: Updated booking details, car status, and success message.
 
-### Booking Management
+### **Booking Management**
 
 
-Create Booking(POST): `/api/bookings` (User only)
+**Create Booking(POST): `/api/bookings` (User only)**
 * Request header:
 >
 ```
@@ -186,7 +186,7 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 
 
 
-Get User's Booking(GET): `/api/bookings/my-bookings` (User only)
+**Get User's Booking(GET): `/api/bookings/my-bookings` (User only)**
 * Request header:
 >
 ```
@@ -200,7 +200,7 @@ After signin a token will be generated with "Bearer" at the beginning of the tok
 * Response: User's booked details and success message.
 
 
-Get All Booking(GET): `/api/bookings` (Admin only)
+**Get All Booking(GET): `/api/bookings` (Admin only)**
 * Query Parameters:
 >
 ```

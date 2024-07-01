@@ -97,6 +97,7 @@ const returnCarIntoDB = async (bookingId: string, endTime: string) => {
     session.endSession();
 
     return updatedBooking;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     await session.abortTransaction();
     session.endSession();

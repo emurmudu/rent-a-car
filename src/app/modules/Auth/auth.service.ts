@@ -6,7 +6,7 @@ import { User } from "../user/user.model";
 import { TUserLogin } from "./auth.interface";
 // import { createToken } from "./auth.utils";
 import config from "../../config";
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 import { createToken } from "./auth.utils";
 
 
