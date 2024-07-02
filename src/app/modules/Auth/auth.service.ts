@@ -35,7 +35,7 @@ const signUp = async (payload: TUserLogin) => {
   const jwtPayload = { email: user.email, role: user.role };
 
   const accessToken = createToken(jwtPayload, config.jwt_access_secret as string, "10d");
-  const token = `Bearer ${accessToken}`;
+  const token = `${accessToken}`;
   const refreshToken = createToken(jwtPayload, config.jwt_refresh_secret as string, "365d");
 
   return { token, accessToken, refreshToken, user };
