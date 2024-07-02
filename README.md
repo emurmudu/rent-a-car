@@ -88,7 +88,7 @@ Authorization:
 Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmF
 tZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
-After signin a token will be generated without "Bearer" at the beginning of the token, but when you send the data from client side add the 'Bearer' before token in header.
+After signin with admin a token will be generated without "Bearer" at the beginning of the token, but when you send the data from client side add the 'Bearer' before token in header.
 ```
 * Request body:
 >
